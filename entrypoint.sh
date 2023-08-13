@@ -81,28 +81,11 @@ git config --global http.version HTTP/1.1
 }
 ls -la "$CLONE_DIR"
 
-TEMP_DIR=$(mktemp -d)
-# This mv has been the easier way to be able to remove files that were there
-# but not anymore. Otherwise we had to remove the files from "$CLONE_DIR",
-# including "." and with the exception of ".git/"
-mv "$CLONE_DIR/.git" "$TEMP_DIR/.git"
-
 # $TARGET_DIRECTORY is '' by default
 ABSOLUTE_TARGET_DIRECTORY="$CLONE_DIR/$TARGET_DIRECTORY/"
 
-echo "[+] Deleting $ABSOLUTE_TARGET_DIRECTORY"
-rm -rf "$ABSOLUTE_TARGET_DIRECTORY"
-
-echo "[+] Creating (now empty) $ABSOLUTE_TARGET_DIRECTORY"
-mkdir -p "$ABSOLUTE_TARGET_DIRECTORY"
-
 echo "[+] Listing Current Directory Location"
 ls -al
-
-echo "[+] Listing root Location"
-ls -al /
-
-mv "$TEMP_DIR/.git" "$CLONE_DIR/.git"
 
 echo "[+] List contents of $SOURCE_DIRECTORY"
 ls "$SOURCE_DIRECTORY"
